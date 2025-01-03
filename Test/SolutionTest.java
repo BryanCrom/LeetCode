@@ -10,7 +10,7 @@ class SolutionTest {
     @org.junit.jupiter.api.Test
     void LeetCodeTest() {
         Solution solution = new Solution();
-        TreeNode root = new TreeNode(1, new TreeNode(7, new TreeNode(7), new TreeNode(-8)), new TreeNode(0));
-        assertEquals(2, solution.maxLevelSum(root));
+        TreeNode root = new TreeNode(4, new TreeNode(2, new TreeNode(1), new TreeNode(3)), new TreeNode(7));
+        assertEquals(null, solution.searchBST(root, 5));
     }
 }
