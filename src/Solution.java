@@ -1,47 +1,31 @@
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.Stack;
 
 class Solution {
-    public TreeNode deleteNode(TreeNode root, int key) {
-
-        //base case if null
-        if (root == null){
-            return null;
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        int size = rooms.size();
+        if (size < 2) { return true; }
+        Stack stack = new Stack();
+        Set<Integer> visited = new HashSet<>();
+        for(int key: rooms.get(0)){
+            stack.push(key);
         }
+        visited.add(0);
 
-        //traverse to the right if key is greater
-        if(root.val < key){
-            root.right = deleteNode(root.right, key);
-        }
-        //traverse left if key is lesser
-        else if(root.val > key){
-            root.left = deleteNode(root.left, key);
-        }
-        else{
-            //if node to be deleted has 0 or 1 children
-            if(root.left == null){
-                return root.right;
-            }
-            else if(root.right == null){
-                return root.left;
-            }
-
-            //if node to be deleted has 2 children
-            else{
-
-                //find in-order successor
-                TreeNode successor = root.right;
-                while(successor.left != null){
-                    successor = successor.left;
+        while (!stack.empty()) {
+            int node = (int) stack.pop();
+            for (int key: rooms.get(node)) {
+                if (!visited.contains(key)) {
+                    stack.push(key);
                 }
-
-                //assign successor value to node to be deleted
-                root.val = successor.val;
-
-                //delete successor node
-                root.right = deleteNode(root.right, successor.val);
             }
+            visited.add(node);
         }
-
-        return root;
+        if (visited.size() == size) {
+            return true;
+        }
+        return false;
     }
 }
