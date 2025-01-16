@@ -11,11 +11,7 @@ class SolutionTest {
     @org.junit.jupiter.api.Test
     void LeetCodeTest() {
         Solution solution = new Solution();
-        List<List<Integer>> rooms = new ArrayList<>();
-        rooms.add(List.of(1, 3));
-        rooms.add(List.of(3, 0, 1));
-        rooms.add(List.of(2));
-        rooms.add(List.of(0));
-        assertEquals(false , solution.canVisitAllRooms(rooms));
+        int[][] cities = new int[][]{{1,0,0},{0,1,0},{0,0,1}};
+        assertEquals(3, solution.findCircleNum(cities));
     }
 }

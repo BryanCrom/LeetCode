@@ -1,31 +1,31 @@
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
 class Solution {
-    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
-        int size = rooms.size();
-        if (size < 2) { return true; }
+    public int findCircleNum(int[][] isConnected) {
         Stack stack = new Stack();
         Set<Integer> visited = new HashSet<>();
-        for(int key: rooms.get(0)){
-            stack.push(key);
-        }
-        visited.add(0);
-
-        while (!stack.empty()) {
-            int node = (int) stack.pop();
-            for (int key: rooms.get(node)) {
-                if (!visited.contains(key)) {
-                    stack.push(key);
+        stack.push(0);
+        int provinces = 0;
+        while(visited.size() < isConnected.length) {
+            while (!stack.isEmpty()) {
+                int city = (int) stack.pop();
+                visited.add(city);
+                for (int x = 0; x < isConnected.length; x++) {
+                    if (!visited.contains(x) && isConnected[city][x] == 1) {
+                        stack.push(x);
+                    }
                 }
             }
-            visited.add(node);
+            provinces++;
+            for(int i = 0; i < isConnected.length; i++) {
+                if (!visited.contains(i)) {
+                    stack.push(i);
+                    break;
+                }
+            }
         }
-        if (visited.size() == size) {
-            return true;
-        }
-        return false;
+        return provinces;
     }
 }
