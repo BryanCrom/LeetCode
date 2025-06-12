@@ -11,8 +11,6 @@ class SolutionTest {
     @org.junit.jupiter.api.Test
     void LeetCodeTest() {
         Solution solution = new Solution();
-        int n = 6;
-        int[][] connections = new int[][]{{0,1},{1,3},{2,3},{4,0},{4,5}};
-        assertEquals(3, solution.minReorder(n, connections));
+        Assertions.assertEquals(3, solution.maxDifference("aaaaabbc"));
     }
 }
